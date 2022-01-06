@@ -1,4 +1,4 @@
 webpack.config.js
-node_modules/
-dist/
-build/
+node_modules
+dist
+build
