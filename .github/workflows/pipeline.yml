@@ -48,4 +48,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
- 
+  test: 
+    runs-on: ubuntu-18.04
+    steps:
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '12.x'
+      # - name: npm install 
+      #   run: npm install  
+      # - name: lintbrach
+      #   run: npm run eslint
+      # - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
