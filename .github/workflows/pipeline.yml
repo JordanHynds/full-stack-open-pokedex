@@ -19,8 +19,8 @@ jobs:
           node-version: '12.x'
       - name: skip test
         env:
-          COMMIT_MESSAGES: ${{contains(join(toJson(github.event.commits.*.message)), 'skit') }}
-        run: echo "$COMMIT_MESSAGES"
+          COMMIT_MESSAGES: ${{toJson(github.event.commits.*.message)) }}
+        run: echo ${{contains(join($"COMMIT_MESSAGES")), 'skit')}}
       # - name: npm install 
       #   run: npm install  
       # - name: lintbrach
