@@ -17,10 +17,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-        - name: skip
-          env:
-            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          run: echo "$COMMIT_MESSAGES"
+      - name: skip
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
       # - name: npm install 
       #   run: npm install  
       # - name: lintbrach
