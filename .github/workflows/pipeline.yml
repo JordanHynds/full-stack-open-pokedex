@@ -12,6 +12,8 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
+    env:
+          COMMIT_MESSAGES: ${{contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -19,8 +21,6 @@ jobs:
           node-version: '12.x'
       - name: skip
         if: ${{fromJson(env.COMMIT_MESSAGES) == false}}
-        env:
-          COMMIT_MESSAGES: ${{contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         run: echo "$COMMIT_MESSAGES"
       # - name: npm install 
       #   run: npm install  
