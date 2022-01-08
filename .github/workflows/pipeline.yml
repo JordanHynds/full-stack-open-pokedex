@@ -17,8 +17,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: skip
-        if: ${{env.COMMIT_MESSAGES == true}}
+      - name: skip test
+        if: ${{fromJson(env.COMMIT_MESSAGES) == false}}
         env:
           COMMIT_MESSAGES: ${{contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         run: echo "$COMMIT_MESSAGES"
