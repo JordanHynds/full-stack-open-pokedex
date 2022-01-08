@@ -21,7 +21,7 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         run: echo "$COMMIT_MESSAGES"
-        if: "$COMMIT_MESSAGES"
+        if: COMMIT_MESSAGES
       # - name: npm install 
       #   run: npm install  
       # - name: lintbrach
