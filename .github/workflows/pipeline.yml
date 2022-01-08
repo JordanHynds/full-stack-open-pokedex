@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: '12.x'
       - name: test
-        if: ${{ github.event_name == 'push' }} && ${{fromJson(env.COMMIT_MESSAGES) == false}}
-        run: echo ${{fromJson(env.COMMIT_MESSAGES) == false}}
+        #if: ${{ github.event_name == 'push' && fromJson(env.COMMIT_MESSAGES) == false}}
+        run: echo ${{ github.event_name == 'push' && fromJson(env.COMMIT_MESSAGES) == false}}
       # - name: npm install 
       #   run: npm install  
       # - name: lintbrach
