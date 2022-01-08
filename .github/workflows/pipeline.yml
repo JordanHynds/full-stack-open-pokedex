@@ -19,7 +19,7 @@ jobs:
           node-version: '12.x'
       - name: skip test
         env:
-          COMMIT_MESSAGES: ${{toJson(github.event.commits.*.message)) }}
+          COMMIT_MESSAGES: ${{toJson(github.event.commits.*.message) }}
         run: echo ${{contains(join($"COMMIT_MESSAGES")), 'skit')}}
       # - name: npm install 
       #   run: npm install  
