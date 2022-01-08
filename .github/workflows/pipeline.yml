@@ -35,8 +35,7 @@ jobs:
           wait-on: http://localhost:5001
       - name: deployment
         uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' }}
-        if: ${{fromJson(env.COMMIT_MESSAGES) == false}}
+        if: ${{ github.event_name == 'push' }} || ${{fromJson(env.COMMIT_MESSAGES) == false}}
         with: 
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: blooming-plains-89373
@@ -47,8 +46,7 @@ jobs:
       - uses: actions/checkout@v2    
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}  
-        if: ${{fromJson(env.COMMIT_MESSAGES) == false}}
+        if: ${{ github.event_name == 'push' }} || ${{fromJson(env.COMMIT_MESSAGES) == false}} 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
