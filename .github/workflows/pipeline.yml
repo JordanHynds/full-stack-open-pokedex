@@ -17,36 +17,40 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install 
-        run: npm install  
-      - name: lintbrach
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5001
-      - name: deployment
-        uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' }}
-        with: 
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: blooming-plains-89373
-          heroku_email: jordanroberthynds@gmail.com
-          healthcheck: "https://blooming-plains-89373.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-      - uses: actions/checkout@v2    
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}  
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+        - name: skip
+          env:
+            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          run: echo "$COMMIT_MESSAGES"
+      # - name: npm install 
+      #   run: npm install  
+      # - name: lintbrach
+      #   run: npm run eslint
+      # - name: build
+      #   run: npm run build
+      # - name: test
+      #   run: npm run test
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5001
+      # - name: deployment
+      #   uses: akhileshns/heroku-deploy@v3.12.12
+      #   if: ${{ github.event_name == 'push' }}
+      #   with: 
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: blooming-plains-89373
+      #     heroku_email: jordanroberthynds@gmail.com
+      #     healthcheck: "https://blooming-plains-89373.herokuapp.com/health"
+      #     checkstring: "ok"
+      #     rollbackonhealthcheckfailed: true
+      # - uses: actions/checkout@v2    
+      # - name: Bump version and push tag
+      #   uses: anothrNick/github-tag-action@1.33.0
+      #   if: ${{ github.event_name == 'push' }}  
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     DEFAULT_BUMP: patch
     
     
