@@ -21,7 +21,7 @@ jobs:
           node-version: '12.x'
       - name: test
         if: ${{ github.event_name == 'push' }} && ${{fromJson(env.COMMIT_MESSAGES) == false}}
-        run: echo env.COMMIT_MESSAGES
+        run: echo $env.COMMIT_MESSAGES
       # - name: npm install 
       #   run: npm install  
       # - name: lintbrach
