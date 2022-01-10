@@ -19,6 +19,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: steps.deployment.outcome == 'success' || steps.build.outcome == 'failure'    
       - name: npm install 
         run: npm install  
       - name: lintbrach
@@ -27,13 +34,6 @@ jobs:
         #run: npm run build
         run: exit 1
         id: build
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,took # selectable (default: repo,message)
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: steps.deployment.outcome == 'success' || steps.build.outcome == 'failure'
       - name: run tests
         run: npm run test
       - name: e2e tests
