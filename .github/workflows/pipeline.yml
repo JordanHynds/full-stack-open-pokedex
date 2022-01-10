@@ -34,7 +34,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: steps.deployment.outcome == 'success' || steps.build.outcome == 'failure'
-      - name: test
+      - name: run tests
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
