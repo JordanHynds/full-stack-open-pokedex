@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: failure -  slack notification
+      - name: failure - slack notification
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -61,7 +61,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always() && steps.build.outcome != 'success'
-        - name: success -  slack notification
+      - name: success -  slack notification
         uses: 8398a7/action-slack@v3
         with:
               status: custom
