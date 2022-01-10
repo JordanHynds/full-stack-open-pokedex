@@ -24,8 +24,7 @@ jobs:
       - name: lintbrach
         run: npm run eslint
       - name: build
-        #run: npm run build
-        run: exit 1
+        run: npm run build
         id: build
       - name: run tests
         run: npm run test
