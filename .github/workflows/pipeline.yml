@@ -36,6 +36,7 @@ jobs:
       - name: deployment
         uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{ github.event_name == 'push' && fromJson(env.COMMIT_MESSAGES) == false}}
+        id: deployment 
         with: 
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: blooming-plains-89373
@@ -53,9 +54,9 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+          fields: repo,message,commit,author,took # selectable (default: repo,message)
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled 
+        if: steps.deployment == 'success' 
     
     
