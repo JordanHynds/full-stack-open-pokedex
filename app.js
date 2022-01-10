@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const express = require('express')
-const app = express()
+const appd = express()
 
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 5001

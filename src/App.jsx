@@ -7,8 +7,7 @@ import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
 
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
-  // eslint-disable-next-line no-undef
-  ur,
+  url,
   name,
   id: parseInt(url.match(/\/(\d+)\//)[1])
 })))
