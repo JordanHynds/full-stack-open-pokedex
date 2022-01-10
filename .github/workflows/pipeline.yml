@@ -69,7 +69,7 @@ jobs:
                 {
                   attachments: [{
                     color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                    text: `a new version deployed to ${process.env.AS_COMMIT} of by ${process.env.AS_AUTHOR} in ${process.env.AS_TOOK}`,
+                    text: `a new version deployed to https://blooming-plains-89373.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} in ${process.env.AS_TOOK}`,
                   }]
                 }
         env:
