@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: slack notification
+      - name: failure slack notification
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -61,5 +61,20 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always() && steps.build.outcome != 'success'
+        - name:  success slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+              status: custom
+              fields: workflow,job,commit,repo,ref,author,took
+              custom_payload: |
+                {
+                  attachments: [{
+                    color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                    text: `a new version deployed to ${process.env.AS_COMMIT} of by ${process.env.AS_AUTHOR} in ${process.env.AS_TOOK}`,
+                  }]
+                }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() && steps.deployment.outcome == 'success'
     
     
