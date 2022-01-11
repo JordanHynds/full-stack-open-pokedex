@@ -79,7 +79,7 @@ jobs:
         uses: jtalk/url-health-check-action@v2
         with:
           # Check the following URLs one by one sequentially
-          url: https://example.com|http://example.com
+          url: https://blooming-plains-89373.herokuapp.com/
           # Follow redirects, or just report success on 3xx status codes
           follow-redirect: no # Optional, defaults to "no"
           # Fail this action after this many failed attempts
