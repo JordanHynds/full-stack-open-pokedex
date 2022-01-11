@@ -1,0 +1,18 @@
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "5 * * * *"
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v2
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://blooming-plains-89373.herokuapp.com/
+          # Follow redirects, or just report success on 3xx status codes
+          max-attempts: 3 # Optional, defaults to 1
+          # Delay between retries
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
