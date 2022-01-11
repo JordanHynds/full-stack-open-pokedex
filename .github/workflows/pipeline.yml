@@ -75,7 +75,6 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always() && steps.deployment.outcome == 'success'
-      - steps:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v2
         with:
